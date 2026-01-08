@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chauhan Nayan - Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                DEFAULT: '#10b981', // Emerald
+                dark: '#34d399',
+              },
+              secondary: {
+                DEFAULT: '#f43f5e', // Rose for high-visibility buttons
+                dark: '#fb7185',
+              },
+              accent: '#fbbf24', // Amber
+              darkBg: '#09090b', // Zinc-950 Deep Charcoal
+              lightBg: '#f1f5f9', // Slate-100 Soft Light
+            },
+            borderRadius: {
+              'button': '10px',
+              'card': '24px'
+            },
+            animation: {
+              'item-reveal': 'itemReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+              'fade-in': 'fadeIn 0.5s ease-out forwards',
+              'shimmer': 'shimmer 2.5s infinite linear',
+              'logo-3d': 'logo3D 15s linear infinite',
+              'stars-slow': 'starsScroll 180s linear infinite',
+              'stars-med': 'starsScroll 110s linear infinite',
+              'stars-fast': 'starsScroll 70s linear infinite',
+            },
+            keyframes: {
+              shimmer: {
+                '0%': { transform: 'translateX(-100%)' },
+                '100%': { transform: 'translateX(100%)' }
+              },
+              logo3D: {
+                '0%': { transform: 'perspective(500px) rotateY(0deg)' },
+                '100%': { transform: 'perspective(500px) rotateY(360deg)' }
+              },
+              starsScroll: {
+                'from': { transform: 'translateY(0px)' },
+                'to': { transform: 'translateY(-2000px)' }
+              },
+              itemReveal: {
+                'from': { opacity: '0', transform: 'translateY(20px)' },
+                'to': { opacity: '1', transform: 'translateY(0)' }
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <!-- Fonts: Lexend and Inter are both premium Sans Serif fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .title-font {
+            font-family: 'Lexend', sans-serif;
+            letter-spacing: -0.01em;
+        }
+
+        /* Theme Base */
+        body.dark {
+            background-color: #09090b;
+            color: #f8fafc;
+        }
+        body:not(.dark) {
+            background-color: #f1f5f9;
+            color: #0f172a;
+        }
+
+        /* 3D Moving Starfield */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .star-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 4000px;
+            background: transparent;
+        }
+
+        /* Dense starfield generated via box-shadow */
+        .stars-1 {
+            width: 1px;
+            height: 1px;
+            box-shadow: 474px 119px #FFF, 1264px 334px #FFF, 882px 1654px #FFF, 1432px 887px #FFF, 177px 443px #FFF, 1921px 1123px #FFF, 456px 1987px #FFF, 1345px 123px #FFF, 88px 1567px #FFF, 765px 443px #FFF, 1234px 1765px #FFF, 1987px 55px #FFF, 444px 111px #FFF, 999px 888px #FFF, 222px 1444px #FFF, 1666px 222px #FFF, 123px 1888px #FFF, 777px 555px #FFF, 1555px 999px #FFF, 333px 123px #FFF;
+        }
+
+        .stars-2 {
+            width: 2px;
+            height: 2px;
+            box-shadow: 247px 976px #FFF, 1206px 656px #FFF, 876px 1246px #FFF, 1641px 1939px #FFF, 1437px 261px #FFF, 1022px 1677px #FFF, 487px 721px #FFF, 1333px 111px #FFF, 555px 1888px #FFF, 1999px 444px #FFF;
+        }
+
+        .dark .stars-container { opacity: 0.3; }
+        body:not(.dark) .stars-container { opacity: 0.05; }
+
+        /* Glassmorphism */
+        .glass-card {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .dark .glass-card {
+            background: rgba(18, 18, 23, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.9);
+        }
+        
+        body:not(.dark) .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Neutral Aurora (Emerald for highlights, no blue) */
+        .aurora {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            width: 1200px;
+            height: 1200px;
+            border-radius: 50%;
+            filter: blur(200px);
+            opacity: 0.1;
+            animation: auroraLoop 80s infinite linear alternate;
+        }
+
+        .dark .blob-1 { background: radial-gradient(circle, #10b981 0%, transparent 70%); left: -25%; top: -25%; }
+        .dark .blob-2 { background: radial-gradient(circle, #27272a 0%, transparent 70%); right: -25%; bottom: -25%; }
+
+        @keyframes auroraLoop {
+            from { transform: translate(0, 0) rotate(0deg); }
+            to { transform: translate(15%, 15%) rotate(360deg); }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        .dark ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 10px; }
+        body:not(.dark) ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #10b981; }
+
+        .gradient-text {
+            background: linear-gradient(to right, #10b981, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-logo-3d {
+            display: inline-block;
+            transform-style: preserve-3d;
+            animation: logo3D 15s linear infinite;
+        }
+
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .section-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .progress-bar-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 4px;
+            z-index: 100;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(to right, #10b981, #f43f5e);
+            width: 0%;
+        }
+
+        .masonry-item { break-inside: avoid; margin-bottom: 2.5rem; }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+</head>
+<body class="dark">
+    <div class="aurora">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+    <div class="stars-container">
+        <div class="star-layer stars-1 animate-stars-slow"></div>
+        <div class="star-layer stars-2 animate-stars-med"></div>
+        <div class="star-layer stars-1 animate-stars-fast" style="opacity: 0.6;"></div>
+    </div>
+    <div id="root"></div>
+</body>
+</html>
